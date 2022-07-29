@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+service Mnist {
+  rpc SendTrainingData (stream FullImageData) returns (stream LossReply) {}
+  rpc GetPredictions (stream ImageData) returns (stream PredictionReply) {}
+}
+
+message FullImageData {
+  uint32 value = 1;
+  repeated uint32 data = 2;
+}
+
+message ImageData {
+  repeated uint32 data = 1;
+}
+
+message LossReply {
+  double loss = 1;
+}
+
+message PredictionReply {
+  uint32 prediction = 1;
+}
